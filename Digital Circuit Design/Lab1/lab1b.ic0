@@ -1,0 +1,15 @@
+* "simulator" "HSPICE" 
+* "version" "D-2010.03 32-BIT"
+* "format" "HSP"
+* "rundate" "15:59:11 09/29/2016 "
+* "netlist" "lab1b.lis "
+* "runtitle" "pmos transistor"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ 1 =   1.0000        
++ 2 =   1.0000        
+***   END: Saved Operating Point ***                     

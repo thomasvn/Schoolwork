@@ -1,0 +1,18 @@
+NMOS Transistor
+
+** Circuit Description
+Vds 1 0 DC +1V
+Vgs 2 0 DC +1V
+
+M1 1 2 0 NCH L = 1.8u W = 1.8u
+
+.model NCH NMOS LEVEL = 1
+
+** Analysis Request
+.OP
+.DC Vds 0 5 0.1 Vgs 1 5 1
+
+** Output Request
+.PLOT DC ID(M1)
+.option post=1
+.end
