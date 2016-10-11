@@ -4,7 +4,7 @@ PMOS Transistor
 Vds 1 0 DC +1V
 Vgs 2 0 DC +1V
 
-M1 1 2 0 PCH L = 1.8u W = 1.8u
+M1 1 2 0 PCH L = 12u W = 5.4u
 
 .model PCH PMOS LEVEL = 1
 

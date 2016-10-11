@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "D-2010.03 32-BIT"
 * "format" "HSP"
-* "rundate" "15:59:11 09/29/2016 "
+* "rundate" "17:36:45 10/05/2016 "
 * "netlist" "lab1b.lis "
 * "runtitle" "pmos transistor"
 * time =    0.            
