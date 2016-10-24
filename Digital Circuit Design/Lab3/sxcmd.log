@@ -1,0 +1,122 @@
+### CustomExplorer log file, revision C-2009.09-SP2 (build 0909) ###
+### created at 23:12:36 on Sun Oct  9 2016 (Linux) ###
+# (0) running in waveview only mode
+# (0) SW_SX_PERL_LIB defined
+# (0) SW_SX_TCL_LIB defined
+# (0) HOME defined
+wv_move_window CustomWaveView 0 0
+wv_resize_window CustomWaveView 800 400
+wv_move_window CustomWaveView 1079 768
+wv_move_window CustomWaveView 336 191
+wv_resize_window CustomWaveView 900 550
+wv_expand_hierview_item {FILE0:D0:test.tr0}
+wv_expand_hierview_item {FILE0:D0:test.tr0} {toplevel}
+wv_collapse_hierview_item {FILE0:D0:test.tr0} {toplevel}
+wv_select_hierview_item {FILE0:D0:test.tr0} {toplevel}
+wv_select_sigview_item v(out1)
+wv_drag_sigview_item v(out1)
+wv_drag_enter WV1
+wv_drop_on WV1
+wv_move_window CustomWaveView 331 190
+wv_move_window CustomWaveView 325 191
+wv_move_window CustomWaveView 312 195
+wv_move_window CustomWaveView 300 197
+wv_move_window CustomWaveView 285 200
+wv_move_window CustomWaveView 270 203
+wv_move_window CustomWaveView 252 206
+wv_move_window CustomWaveView 234 208
+wv_move_window CustomWaveView 215 212
+wv_move_window CustomWaveView 198 214
+wv_move_window CustomWaveView 184 219
+wv_move_window CustomWaveView 169 222
+wv_move_window CustomWaveView 158 226
+wv_move_window CustomWaveView 147 227
+wv_move_window CustomWaveView 135 233
+wv_move_window CustomWaveView 128 235
+wv_move_window CustomWaveView 121 238
+wv_move_window CustomWaveView 114 243
+wv_move_window CustomWaveView 110 246
+wv_move_window CustomWaveView 107 248
+wv_move_window CustomWaveView 105 249
+wv_move_window CustomWaveView 104 250
+wv_move_window CustomWaveView 103 251
+wv_move_window CustomWaveView 102 251
+wv_move_window CustomWaveView 101 251
+wv_move_window CustomWaveView 101 252
+wv_move_window CustomWaveView 100 252
+wv_move_window CustomWaveView 99 253
+wv_move_window CustomWaveView 100 253
+wv_move_window CustomWaveView 101 253
+wv_move_window CustomWaveView 102 253
+wv_move_window CustomWaveView 102 252
+wv_move_window CustomWaveView 103 252
+wv_move_window CustomWaveView 104 252
+wv_move_window CustomWaveView 105 251
+wv_move_window CustomWaveView 106 251
+wv_move_window CustomWaveView 107 251
+wv_move_window CustomWaveView 108 250
+wv_move_window CustomWaveView 109 249
+wv_move_window CustomWaveView 110 249
+wv_move_window CustomWaveView 111 249
+wv_move_window CustomWaveView 112 249
+wv_move_window CustomWaveView 113 248
+wv_move_window CustomWaveView 114 248
+wv_move_window CustomWaveView 115 248
+wv_move_window CustomWaveView 116 247
+wv_move_window CustomWaveView 117 247
+wv_move_window CustomWaveView 118 247
+wv_move_window CustomWaveView 119 247
+wv_move_window CustomWaveView 120 247
+wv_move_window CustomWaveView 121 247
+wv_move_window CustomWaveView 122 247
+wv_move_window CustomWaveView 122 246
+wv_move_window CustomWaveView 123 246
+wv_move_window CustomWaveView 124 246
+wv_move_window CustomWaveView 125 246
+wv_move_window CustomWaveView 126 246
+wv_move_window CustomWaveView 127 245
+wv_move_window CustomWaveView 129 244
+wv_move_window CustomWaveView 132 244
+wv_move_window CustomWaveView 135 243
+wv_move_window CustomWaveView 139 242
+wv_move_window CustomWaveView 142 242
+wv_move_window CustomWaveView 146 242
+wv_move_window CustomWaveView 154 242
+wv_move_window CustomWaveView 163 242
+wv_move_window CustomWaveView 172 242
+wv_move_window CustomWaveView 184 242
+wv_move_window CustomWaveView 205 242
+wv_move_window CustomWaveView 218 242
+wv_move_window CustomWaveView 232 242
+wv_move_window CustomWaveView 247 242
+wv_move_window CustomWaveView 260 242
+wv_move_window CustomWaveView 275 242
+wv_move_window CustomWaveView 291 242
+wv_move_window CustomWaveView 303 243
+wv_move_window CustomWaveView 315 244
+wv_move_window CustomWaveView 327 245
+wv_move_window CustomWaveView 341 247
+wv_move_window CustomWaveView 352 248
+wv_move_window CustomWaveView 366 251
+wv_move_window CustomWaveView 376 252
+wv_move_window CustomWaveView 389 253
+wv_move_window CustomWaveView 402 255
+wv_move_window CustomWaveView 413 256
+wv_move_window CustomWaveView 423 258
+wv_move_window CustomWaveView 433 260
+wv_move_window CustomWaveView 442 261
+wv_move_window CustomWaveView 451 262
+wv_move_window CustomWaveView 457 265
+wv_move_window CustomWaveView 465 266
+wv_move_window CustomWaveView 470 267
+wv_move_window CustomWaveView 474 268
+wv_move_window CustomWaveView 477 268
+wv_move_window CustomWaveView 478 268
+wv_move_window CustomWaveView -4 -3
+wv_resize_window CustomWaveView 1920 1150
+wv_close_window CustomWaveView
+## Confirmation dialog opened
+wv_move_dialog Confirmation 862 545
+wv_select_dialog Confirmation
+wv_select_dialog Confirmation
+# wv_press_button Confirmation.Ok

@@ -1,0 +1,33 @@
+TEST
+*TEST circuit for MYNAND2
+.OPTIONS POST=1
+**CIRCUIT DESCRIPTION
+* Power Supplies / Signal Sources
+.GLOBAL VDD
+*
+V1 VDD 0 DC 3.3
+VA A1 0 PULSE (0V, 3.3V, 90ns, 10ns, 10ns, 190ns, 320ns)
+VB B1 0
+*
+* Element Descriptions
+XNAND1 OUT1 A1 B1 MYNAND2
+CLOAD OUT1 0 2P
+*
+.SUBCKT MYNAND2 OUT A B
+MPA OUT A VDD VDD PCH W=3.2u L=0.4u
+MPB OUT B VDD VDD PCH W=3.2u L=0.4u
+MNA J A 0 0 NCH W=3.2u L=0.4u
+MNB OUT B J 0 NCH W=3.2u L=0.4u
+.ENDS
+*
+* Model Statements
+.model PCH PMOS LEVEL=1
+.model NCH NMOS LEVEL=1
+*
+**Analysis Requests
+.TRAN 10n 690n
+*
+**Output Requests
+.probe
+*
+.end
