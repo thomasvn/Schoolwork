@@ -1,0 +1,5 @@
+(DEFINE pi 3.14159)
+(DEFINE (volume radius)
+    (* (* pi (/ 4 3)) (EXPT radius 3))
+)
+(volume 2)

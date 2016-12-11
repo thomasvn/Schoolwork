@@ -1,0 +1,11 @@
+(DEFINE (equalsimp lis1 lis2)
+    (COND
+        ((NULL? lis1) (NULL? lis2))
+        ((NULL? lis2) #F)
+        ((EQ? (CAR lis1) (CAR lis2))
+            (equalsimp (CDR lis1) (CDR lis2))
+        )
+        (ELSE #F)
+    )
+)
+(equalsimp '(1 2 3) '(1 2 3))
