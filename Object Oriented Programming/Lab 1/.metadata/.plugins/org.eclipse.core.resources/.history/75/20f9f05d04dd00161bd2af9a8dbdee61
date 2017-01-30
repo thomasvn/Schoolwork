@@ -1,0 +1,11 @@
+package lab1a;
+
+Public class Cube
+{
+   public static void main()
+   {
+       double height = 3.0; \ inches
+       double cube-volume = height * height * height
+       System.out.println("Volume = " cube_volume);
+   }
+}

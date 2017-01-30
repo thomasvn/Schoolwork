@@ -1,0 +1,29 @@
+package lab1a;
+
+/**
+ * The Tester class contains constructors to instantiate
+ * instances of Puppy with the option of setting its name
+ * and age.
+ * 
+ * This class also includes setters and getters to interface
+ * with the private member variables
+ * 
+ * Answers to Questions:
+ * 
+ * @author thomasnguyen
+ *
+ */
+
+public class Tester {
+	public static void main(String[] args) {
+		Puppy myPuppy = new Puppy("Waffles", 2);
+		System.out.println("Puppy name: " + myPuppy.getName());
+		System.out.println("Puppy age: " + myPuppy.getAge());
+		
+		Puppy myPuppy2 = new Puppy();
+		myPuppy2.setName("ButterCup");
+		myPuppy2.setAge(4);
+		System.out.println("Puppy name: " + myPuppy2.getName());
+		System.out.println("Puppy age: " + myPuppy2.getAge());
+	}
+}

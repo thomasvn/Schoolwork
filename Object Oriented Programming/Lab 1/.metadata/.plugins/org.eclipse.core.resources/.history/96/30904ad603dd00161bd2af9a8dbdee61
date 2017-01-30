@@ -1,0 +1,27 @@
+package lab1a;
+
+public class Puppy {
+	private String name;
+	private int age;
+
+	public Puppy() {
+		name = "Name not given yet";
+		age = 0;
+	}
+
+	public Puppy(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	// --------------- GETTERS --------------- //
+	public String getName() {
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+	
+	// --------------- SETTERS --------------- //
+}

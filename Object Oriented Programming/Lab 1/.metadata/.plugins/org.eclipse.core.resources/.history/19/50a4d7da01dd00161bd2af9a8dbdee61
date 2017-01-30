@@ -1,0 +1,17 @@
+package Lab1a;
+
+public class puppy {
+    private String name;
+    private int age;
+    public puppy(){
+          name = "Name not given yet";
+age = 0; }
+    public puppy(String name, int age){
+          this.name = name;
+          this.age = age;
+    }
+    public static void main(String[] args) {
+          puppy myPuppy = new puppy("Waffles",2);
+          System.out.println("Puppy name: "+myPuppy.name);
+    }
+}
