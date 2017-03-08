@@ -1,0 +1,58 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+@SuppressWarnings("serial")
+class TrafficLight extends JFrame {
+	// Declarations
+	private JButton trafficLightButton, change;
+	private JPanel panel;
+	private JLabel label;
+
+	public TrafficLight() {
+		setSize(500, 150);
+
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+
+		panel = new JPanel();
+
+		label = new JLabel("Fahrenheit:", JLabel.CENTER);
+		panel.add(label);
+
+		trafficLightButton = new JButton("TrafficLightButton");
+		trafficLightButton.setBackground(Color.YELLOW);
+		panel.add(trafficLightButton);
+		
+		// This statement instantiates our Converter class and adds a listener
+		// to the `convertButton`
+		trafficLightButton.addActionListener(null);
+	
+		container.add(panel);
+		
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+}
+
+
+public class Exercise1 {
+	public static void main(String[] args) {
+		// Run the GUI codes on Event-Dispatching thread for thread safety
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new TrafficLight();
+			}
+		});
+	}
+}

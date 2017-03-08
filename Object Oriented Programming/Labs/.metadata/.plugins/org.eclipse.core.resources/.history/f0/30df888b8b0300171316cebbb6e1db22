@@ -1,0 +1,244 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+/**
+ * The WaterTank class is our model and monitors the flow of water in and out of
+ * the tank. It additionally notifies the Observer when changes are made.
+ * 
+ * @author
+ */
+class WaterTank extends Observable {
+	private final int CAPACITY = 1000;
+	private final int ADDED_VOLUME_PER_STEP = 20;
+	private final int SUBTRACTED_VOLUME_PER_STEP = 20;
+	private int currentVolume = 0;
+	private boolean shutOff = false;
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param c
+	 */
+	public WaterTank(int c) {
+		this.currentVolume = c;
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param addedVolume
+	 */
+	public void flowIn(int addedVolume) {
+		if (this.currentVolume + addedVolume < this.CAPACITY) {
+			this.currentVolume += addedVolume;
+			this.open();
+
+			// Volume changed. Therefore notify the observers
+			this.setChanged();
+			this.notifyObservers();
+		}
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void flowIn() {
+		if (this.currentVolume + this.ADDED_VOLUME_PER_STEP < this.CAPACITY) {
+			this.currentVolume += this.ADDED_VOLUME_PER_STEP;
+			this.open();
+
+			// Volume changed. Therefore notify the observers
+			this.setChanged();
+			this.notifyObservers();
+		}
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void flowOut() {
+		if (!this.shutOff) {
+			this.currentVolume -= SUBTRACTED_VOLUME_PER_STEP;
+
+			// Volume changed. Therefore notify the observers
+			this.setChanged();
+			this.notifyObservers();
+		}
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void open() {
+		this.shutOff = false;
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param flag
+	 */
+	public void setShutOff(boolean flag) {
+		this.shutOff = flag;
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @return
+	 */
+	public int getCurrentVolume() {
+		return this.currentVolume;
+	}
+}
+
+/**
+ * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+ * 
+ * @author
+ */
+class LevelMonitor implements Observer {
+	protected final int CRITICAL_LEVEL;
+	protected WaterTank tank; // this is the Observable object that should be
+								// observed
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param level
+	 * @param t
+	 * @param wtsim2
+	 */
+	public LevelMonitor(int level, WaterTank t) {
+		this.CRITICAL_LEVEL = level;
+		this.tank = t;
+		// add this as the observer on tank
+		this.tank.addObserver(this);
+
+		if (this.tank.getCurrentVolume() > this.CRITICAL_LEVEL) {
+			this.tank.open();
+		}
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void update(Observable o, Object t) {
+		int volume = this.tank.getCurrentVolume();
+
+		if (volume <= this.CRITICAL_LEVEL) {
+			this.tank.setShutOff(true);
+
+		} else {
+
+		}
+	}
+}
+
+/**
+ * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+ * 
+ * @author
+ */
+@SuppressWarnings("serial")
+public class WTSim2 extends JFrame implements ActionListener {
+	private Container container;
+	private JButton flowIn, flowOut;
+	private JLabel output;
+
+	private WaterTank tank;
+	private LevelMonitor monitor;
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param titleText
+	 */
+	public WTSim2(String titleText) {
+		// Set the title to "WTSim2"
+		super(titleText);
+
+		this.tank = new WaterTank(100);
+		this.monitor = new LevelMonitor(50, tank);
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.container = getContentPane();
+
+		// Create the buttons with labels as shown in the figure.
+		flowIn = new JButton("Flow In");
+		flowOut = new JButton("Flow Out");
+
+		// Set the action commands to "in" and "out" on the buttons respectively
+		flowIn.setActionCommand("IN");
+		flowOut.setActionCommand("OUT");
+
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new FlowLayout());
+
+		// Create Label for output
+		output = new JLabel(Integer.toString(tank.getCurrentVolume()));
+
+		// Add the buttons and output
+		container.add(flowIn);
+		container.add(flowOut);
+		container.add(output);
+
+		// Add the actionListener as "this" on both buttons
+		flowIn.addActionListener(this);
+		flowOut.addActionListener(this);
+
+		this.setSize(500, 200);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void actionPerformed(ActionEvent e) {
+		// If actionCommand is "in", you must call tank.flowIn.
+		if (e.getActionCommand().equals("IN")) {
+			tank.flowIn();
+
+			container.remove(output);
+			output = new JLabel(Integer.toString(tank.getCurrentVolume()));
+			if (tank.getCurrentVolume() <= monitor.CRITICAL_LEVEL) {
+				output.setBackground(Color.RED);
+				output.setOpaque(true);
+			}
+			container.add(output);
+			revalidate();
+		}
+		// If actionCommand is "out", you must call tank.flowOut.
+		else {
+			tank.flowOut();
+
+			container.remove(output);
+			output = new JLabel(Integer.toString(tank.getCurrentVolume()));
+			if (tank.getCurrentVolume() <= monitor.CRITICAL_LEVEL) {
+				output.setBackground(Color.RED);
+				output.setOpaque(true);
+			}
+			container.add(output);
+			revalidate();
+		}
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new WTSim2("WTSim2");
+	}
+}

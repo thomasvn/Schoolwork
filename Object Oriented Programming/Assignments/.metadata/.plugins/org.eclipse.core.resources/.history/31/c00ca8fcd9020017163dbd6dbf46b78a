@@ -1,0 +1,73 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+class TrafficLight extends JFrame implements ActionListener {
+	private JButton trafficLightButton, change;
+	private JPanel panel;
+	private String colorState;
+
+	public TrafficLight(String title) {
+		super(title);
+//		JFrame frame = new JFrame("Traffic Light");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        Container pane = frame.getContentPane();
+//        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+//        frame.setVisible(true);
+//        pane.setLayout(null);   //for absolute positioning
+//        trafficLightColor = Color.RED;
+		
+		setSize(500, 150);
+
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+
+		panel = new JPanel();
+
+		trafficLightButton = new JButton();
+		trafficLightButton.setBackground(Color.RED); // TODO: Make button not
+														// clickable
+		colorState = "RED";
+		trafficLightButton.setOpaque(true);
+		panel.add(trafficLightButton);
+
+		change = new JButton("Change");
+		panel.add(change);
+
+		change.addActionListener(this);
+
+		container.add(panel, BorderLayout.CENTER);
+
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (colorState == "RED") {
+			colorState = "GREEN";
+			trafficLightButton.setBackground(Color.GREEN);
+		} else if (colorState == "YELLOW") {
+			colorState = "RED";
+			trafficLightButton.setBackground(Color.RED);
+		} else if (colorState == "GREEN") {
+			colorState = "YELLOW";
+			trafficLightButton.setBackground(Color.YELLOW);
+		}
+	}
+}
+
+public class Exercise1 {
+	public static void main(String[] args) {
+		new TrafficLight("Traffic Light");
+	}
+}

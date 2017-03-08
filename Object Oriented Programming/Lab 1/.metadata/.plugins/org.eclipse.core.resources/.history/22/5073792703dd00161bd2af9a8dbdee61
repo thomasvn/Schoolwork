@@ -1,9 +1,0 @@
-package lab1a;
-
-public class Tester {
-	public static void main(String[] args) {
-		Puppy myPuppy = new Puppy("Waffles", 2);
-		System.out.println("Puppy name: " + myPuppy.getName());
-		System.out.println("Puppy age: " + myPuppy.getName());
-	}
-}

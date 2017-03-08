@@ -1,0 +1,103 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+ * 
+ * @author
+ */
+@SuppressWarnings("serial")
+public class SalesGraph extends JFrame implements ActionListener {
+	private Container container;
+	private DataManager dataManager = new DataManager();
+	private JButton showButton;
+	private BarChart chart;
+//	JFrame frame;
+	private JLabel label1;
+	private JLabel label2;
+	private JPanel panel1;
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public SalesGraph() {
+		super("Bar Chart");
+		this.getContentPane().setLayout(new BorderLayout());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.container = getContentPane();
+
+		this.panel1 = new JPanel();
+		showButton = new JButton("Show Graph");
+		showButton.addActionListener(this);
+		this.panel1.add(showButton);
+		
+		this.container.add(this.panel1, BorderLayout.CENTER);
+		
+		
+		dataManager.readDataFromFile(".//src//sales.txt");
+////		frame = new JFrame("Bar Chart");
+		this.setSize(600, 800);
+//
+//
+//		this.getContentPane().add(showButton);
+//		
+//		showButton.setBounds(0, 0, showButton.getPreferredSize().width, showButton.getPreferredSize().height);
+//
+//		showButton.setActionCommand("show");
+
+
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 */
+	public void actionPerformed(ActionEvent event) {
+		System.out.println("Here\n");
+		
+		this.setVisible(false);
+		this.container.removeAll();
+
+		label1 = new JLabel("AlphaBeta Inc. Sales Data");
+		label1.setFont(new Font("Georgia", Font.PLAIN, 20));
+		label1.setForeground(Color.BLUE);
+		label1.setBounds(150, 20, label1.getPreferredSize().width, label1.getPreferredSize().height);
+
+		label2 = new JLabel("2017");
+		label2.setFont(new Font("Georgia", Font.PLAIN, 28));
+		label2.setForeground(Color.RED);
+		label2.setBounds(160 + label1.getPreferredSize().width, 15, label2.getPreferredSize().width,
+				label2.getPreferredSize().height);
+
+		this.getContentPane().add(label1);
+		this.getContentPane().add(label2);
+
+		chart = new BarChart(dataManager.getData());
+		chart.setSize(500, 700);
+		this.getContentPane().add(chart);
+		
+		this.setVisible(true);
+		chart.setVisible(true);
+	}
+
+	/**
+	 * ToDo: CommentMe CommentMe CommentMe CommentMe CommentMe CommentMe
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new SalesGraph();
+	}
+}

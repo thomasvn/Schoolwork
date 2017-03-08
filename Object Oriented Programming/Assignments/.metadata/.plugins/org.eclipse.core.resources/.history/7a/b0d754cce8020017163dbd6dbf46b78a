@@ -1,0 +1,190 @@
+package midterm2;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import javax.swing.*;
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+class ClubMember {
+	private String firstName;
+	private String lastName;
+	int age;
+
+	ClubMember(String firstName, String lastName, int age) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+
+	// Getters for ClubMember class
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+}
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+class Club {
+	private ArrayList<ClubMember> memberList;
+
+	public Club() {
+		memberList = new ArrayList<ClubMember>();
+	}
+
+	public void addMember(ClubMember member) {
+		memberList.add(member);
+		System.out.println("You just added " + member.getFirstName());
+	}
+
+	public ArrayList<ClubMember> getMemberList() {
+		return memberList;
+	}
+}
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+@SuppressWarnings("serial")
+class ClubRoster extends JFrame implements ActionListener {
+	private JButton showByLastName, showByAge;
+	private JLabel results;
+	private JPanel panel;
+	private String resultsBuffer = "Results: \n";
+	private Boolean firstTime = true;
+	private final int WINDOW_WIDTH = 500;
+	private final int WINDOW_HEIGHT = 300;
+
+	ClubRoster(Club club) {
+		JFrame frame = new JFrame("Traffic Light");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container container = frame.getContentPane();
+		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		frame.setVisible(true);
+		container.setLayout(null);
+
+//		panel = new JPanel();
+
+		// Create button and also its action listener
+		showByLastName = new JButton(new AbstractAction("Show By Last Name") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sortClubMembersByName(club);
+
+				// Add all names to a label
+				resultsBuffer = " ";
+				for (ClubMember person : club.getMemberList()) {
+					resultsBuffer += person.getLastName() + ", " + person.getFirstName() + "  " + person.getAge()
+							+ "\n";
+				}
+
+				if (!firstTime) {
+					container.remove(results);
+				}
+				firstTime = false;
+
+				results = new JLabel(resultsBuffer);
+				container.add(results, BorderLayout.CENTER);
+				revalidate();
+			}
+		});
+		showByLastName.setBounds((WINDOW_WIDTH - 200) / 2, 10, 200, 120);
+		container.add(showByLastName);
+
+		// Create button and also its action listener
+		showByAge = new JButton(new AbstractAction("Show By Age") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sortClubMembersByAge(club);
+
+				// Add all names to a label
+				resultsBuffer = " ";
+				for (ClubMember person : club.getMemberList()) {
+					resultsBuffer += person.getLastName() + ", " + person.getFirstName() + "  " + person.getAge()
+							+ "\n";
+				}
+
+				if (!firstTime) {
+					container.remove(results);
+				}
+				firstTime = false;
+
+				results = new JLabel(resultsBuffer);
+				container.add(results, BorderLayout.CENTER);
+				revalidate();
+			}
+		});
+		showByAge.setBounds((WINDOW_WIDTH - 200) / 2, 10, 200, 120);
+		container.add(showByAge);
+
+		showByLastName.addActionListener(this);
+		showByAge.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	}
+	
+	private void sortClubMembersByName(Club club) {
+		Collections.sort(club.getMemberList(), new Comparator<ClubMember>() {
+			@Override
+			public int compare(ClubMember person1, ClubMember person2) {
+				return person1.getLastName().compareTo(person2.getLastName());
+			}
+		});
+	}
+	
+	private void sortClubMembersByAge(Club club) {
+		Collections.sort(club.getMemberList(), new Comparator<ClubMember>() {
+			@Override
+			public int compare(ClubMember person1, ClubMember person2) {
+				if (person1.getAge() == person2.getAge()) {
+					return 0;
+				} else if (person1.getAge() < person2.getAge()) {
+					return -1;
+				} else {
+					return 1;
+				}
+			}
+		});
+	}
+}
+
+public class Exercise2 {
+	public static void main(String[] args) {
+		Club club = new Club();
+		club.addMember(new ClubMember("Thomas", "Nguyen", 20));
+		club.addMember(new ClubMember("Drew", "Fajardo", 24));
+		club.addMember(new ClubMember("Ivy", "Fernandes", 28));
+		club.addMember(new ClubMember("Tiffany", "Vien", 6));
+		club.addMember(new ClubMember("Patrick", "Wu", 68));
+		club.addMember(new ClubMember("Michael", "Ney", 18));
+		club.addMember(new ClubMember("Olivia", "Hsieh", 16));
+		club.addMember(new ClubMember("David", "Levitsky", 49));
+		club.addMember(new ClubMember("Ryan", "O'Leary", 35));
+		club.addMember(new ClubMember("Shivajee", "Samdarshi", 52));
+
+		new ClubRoster(club);
+	}
+}

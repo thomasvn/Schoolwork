@@ -1,0 +1,143 @@
+//import java.util.Observable;
+//import java.util.Observer;
+//
+///**
+// * WaterTank is a data object which simulates a water tank and is observable.
+// * 
+// * Answer questions a and b and implement c: 
+// * a) When the water level in a WaterTank object changes, how is a LevelMonitor object notified? 
+// * When `flowIn()` or `flowOut()` are called within the WaterTank class, these methods will 
+// * notify the Observable with functions `this.setChanged()` and `this.notifyObservers()`
+// * 
+// * 
+// * b) On notification, name the method in the LevelMonitor that is called?
+// * When the LevelMonitor class receives notification, the `update()` method will be called.
+// *
+// *
+// * c) Add code to the relevant class(es) to count the no. of times, the CRITICAL_LEVEL is reached. Show the count.
+// *
+// * 
+// */
+//class WaterTank extends Observable {
+//	private final int CAPACITY = 1000;
+//	private final int ADDED_VOLUME_PER_STEP = 20;
+//	private final int SUBTRACTED_VOLUME_PER_STEP = 20;
+//	private int currentVolume = 0;
+//	private boolean shutOff = false;
+//
+//	public WaterTank(int c) {
+//		this.currentVolume = c;
+//	}
+//
+//	public void flowIn(int addedVolume) {
+//		if (this.currentVolume + addedVolume < this.CAPACITY) {
+//			this.currentVolume += addedVolume;
+//			this.open();
+//		}
+//		System.out.println("Levels OK: " + this.currentVolume + " (FlowedIn=" + addedVolume + ")");
+//	}
+//
+//	public void flowIn() {
+//		if (this.currentVolume + this.ADDED_VOLUME_PER_STEP < this.CAPACITY) {
+//			this.currentVolume += this.ADDED_VOLUME_PER_STEP;
+//			this.open();
+//
+//			// Volume changed. Therefore notify the observers
+//			this.setChanged();
+//			this.notifyObservers();
+//		}
+//	}
+//
+//	public void flowOut() {
+//		if (!this.shutOff) {
+//			this.currentVolume -= this.SUBTRACTED_VOLUME_PER_STEP;
+//
+//			// Volume changed. Therefore notify the observers
+//			this.setChanged();
+//			this.notifyObservers();
+//		}
+//	}
+//
+//	public void open() {
+//		this.shutOff = false;
+//	}
+//
+//	public void setShutOff(boolean flag) {
+//		this.shutOff = flag;
+//	}
+//
+//	public int getCurrentVolume() {
+//		return this.currentVolume;
+//	}
+//}
+//
+///**
+// * LevelMonitor is an observer which is monitoring the water level from the
+// * WaterTank.
+// */
+//class LevelMonitor implements Observer {
+//	protected final int CRITICAL_LEVEL;
+//	protected WaterTank tank; // this is the Observable object that should be observed
+//	private int critical_level_counter = 0;
+//
+//	public LevelMonitor(int level, WaterTank t) {
+//		this.CRITICAL_LEVEL = level;
+//		this.tank = t;
+//
+//		// add this as the observer on tank
+//		this.tank.addObserver(this);
+//
+//		if (this.tank.getCurrentVolume() > this.CRITICAL_LEVEL) {
+//			this.tank.open();
+//		}
+//	}
+//
+//	public void update(Observable o, Object t) {
+//		int volume = this.tank.getCurrentVolume();
+//
+//		if (volume <= this.CRITICAL_LEVEL) {
+//			critical_level_counter++;
+//			System.out.println("Levels CRITICAL: " + volume + " Shutting off WaterTank");
+//			System.out.println("Number of times levels were critical: " + critical_level_counter);
+//			this.tank.setShutOff(true);
+//		} else {
+//			System.out.println("Levels OK: " + volume);
+//		}
+//	}
+//}
+//
+///**
+// * WaterTank simulator.
+// */
+//public class WTSim1 {
+//	protected WaterTank tank = new WaterTank(200);
+//	protected LevelMonitor monitor = new LevelMonitor(50, tank);
+//
+//	public WTSim1() {
+//		this.tank = new WaterTank(200);
+//		this.monitor = new LevelMonitor(50, tank);
+//	}
+//
+//	/**
+//	 * Create object and execute test sequence
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		WTSim1 myWT = new WTSim1();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowIn();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowOut();
+//		myWT.tank.flowIn();
+//		myWT.tank.flowIn();
+//		myWT.tank.flowOut();
+//	}
+//}

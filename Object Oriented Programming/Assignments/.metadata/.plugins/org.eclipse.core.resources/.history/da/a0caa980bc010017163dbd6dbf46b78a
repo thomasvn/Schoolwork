@@ -1,0 +1,10 @@
+package midterm2;
+
+class ClubMember {
+	String firstName;
+	String lastName;
+}
+
+public class Exercise2 {
+
+}

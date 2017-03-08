@@ -1,0 +1,55 @@
+package midterm2;
+
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * @author jphan
+ * Traffic Light is a simulaton of a Street Traffic Light. It should change the light state from
+ * Red to Green, Green to Yellow, Yellow to Red.
+ */
+public class TrafficLight extends JFrame {
+    private final int WINDOW_WIDTH = 400;
+    private final int WINDOW_HEIGHT = 300;
+    private Color trafficLightColor;
+
+    public TrafficLight(String title) {
+        super(title);
+        // Initialize GUI stuff
+        JFrame frame = new JFrame("Traffic Light");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container pane = frame.getContentPane();
+        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        frame.setVisible(true);
+        pane.setLayout(null);   //for absolute positioning
+        trafficLightColor = Color.RED;
+
+        // Creating Buttons
+        JButton button = new JButton();
+        button.setText("Light State");
+        button.setBounds((WINDOW_WIDTH - 256) / 2, 10, 256, 64);
+        button.setBackground(trafficLightColor);
+        pane.add(button);
+
+        JButton button2 = new JButton();
+        button2.setText("Change Color");
+        button2.setBounds((WINDOW_WIDTH - 256) / 2, 100, 256, 64);
+        button2.addActionListener(e -> {
+            if (trafficLightColor.equals(Color.red)) {
+                trafficLightColor = Color.GREEN;
+            } else if (trafficLightColor.equals(Color.YELLOW)) {
+                trafficLightColor = Color.RED;
+            } else {
+                trafficLightColor = Color.YELLOW;
+            }
+            button.setBackground(trafficLightColor);
+        });
+        pane.add(button2);
+
+    }
+
+    public static void main(String[] args) {
+        new TrafficLight("Traffic Light");
+    }
+}
+

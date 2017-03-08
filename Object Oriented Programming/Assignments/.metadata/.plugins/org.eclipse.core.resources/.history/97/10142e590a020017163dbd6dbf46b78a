@@ -1,0 +1,134 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+class ClubMember {
+	String firstName;
+	String lastName;
+	int age;
+
+	ClubMember(String firstName, String lastName, int age) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+}
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+class Club {
+	private ArrayList<ClubMember> memberList;
+
+	public Club() {
+		memberList = new ArrayList<ClubMember>();
+	}
+
+	public void addMember(ClubMember member) {
+		memberList.add(member);
+		System.out.println("You just added " + member.firstName);
+	}
+}
+
+/**
+ * 
+ * @author thomasnguyen
+ *
+ */
+@SuppressWarnings("serial")
+class GraphicalUserInterface extends JFrame implements ActionListener {
+	private JButton showByLastName, showByAge;
+	private JLabel results;
+	private JPanel panel;
+
+	GraphicalUserInterface(Club club) {
+		setSize(500, 150);
+
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+
+		panel = new JPanel();
+
+		// Create button and also its action listener
+		showByLastName = new JButton(new AbstractAction("Show By Last Name") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Sort Array list by Last Name
+				Collections.sort(club, new Comparator<Club>() {
+			        @Override
+			        public int compare(Fruit fruit2, Fruit fruit1) {
+			            return  fruit1.fruitName.compareTo(fruit2.fruitName);
+			        }
+			    });
+
+				// Print
+				System.out.println("Show by Last Name");
+			}
+		});
+		panel.add(showByLastName);
+
+		// Create button and also its action listener
+		showByAge = new JButton(new AbstractAction("Show By Age") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Sort Array List by Age
+
+				// Print out Names
+				System.out.println("Show by Age");
+			}
+		});
+		panel.add(showByAge);
+
+		results = new JLabel("Results: ");
+
+		container.add(panel, BorderLayout.NORTH);
+		container.add(results, BorderLayout.CENTER);
+
+		showByLastName.addActionListener(this);
+		showByAge.addActionListener(this);
+
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	}
+}
+
+public class Exercise2 {
+	public static void main(String[] args) {
+		Club club = new Club();
+		club.addMember(new ClubMember("Thomas", "Nguyen", 20));
+		club.addMember(new ClubMember("Drew", "Fajardo", 24));
+		club.addMember(new ClubMember("Ivy", "Fernandes", 28));
+		club.addMember(new ClubMember("Tiffany", "Vien", 6));
+		club.addMember(new ClubMember("Patrick", "Wu", 68));
+		club.addMember(new ClubMember("Michael", "Ney", 18));
+		club.addMember(new ClubMember("Olivia", "Hsieh", 16));
+		club.addMember(new ClubMember("David", "Levitsky", 49));
+		club.addMember(new ClubMember("Ryan", "O'Leary", 35));
+		club.addMember(new ClubMember("Shivajee", "Samdarshi", 52));
+
+		new GraphicalUserInterface(club);
+	}
+}

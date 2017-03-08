@@ -1,0 +1,100 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+class ClubMember {
+	String firstName;
+	String lastName;
+	int age;
+	
+	ClubMember(String firstName, String lastName, int age) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+}
+
+class Club {
+	private ArrayList<ClubMember> memberList;
+	
+	public void addMember(ClubMember member) {
+		memberList.add(member);
+	}
+}
+
+@SuppressWarnings("serial")
+class GraphicalUserInterface extends JFrame implements ActionListener {
+	private JButton showByLastName, showByAge;
+	private JLabel results;
+	private JPanel panel;
+	private ArrayList<ClubMember> memberList;
+
+	GraphicalUserInterface() {
+		memberList = new ArrayList<ClubMember>();
+
+		setSize(500, 150);
+
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+
+		panel = new JPanel();
+
+		showByLastName = new JButton(new AbstractAction("Show By Last Name") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Show by Last Name");
+			}
+		});
+		panel.add(showByLastName);
+
+		showByAge = new JButton(new AbstractAction("Show By Age") {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Show by Last Name");
+			}
+		});
+		panel.add(showByAge);
+
+		results = new JLabel("Results: ");
+
+		container.add(panel, BorderLayout.NORTH);
+		container.add(results, BorderLayout.CENTER);
+
+		showByLastName.addActionListener(this);
+		showByAge.addActionListener(this);
+
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	}
+}
+
+public class Exercise2 {
+	public static void main(String[] args) {
+		Club club = new Club();
+		club.addMember(new ClubMember("Thomas", "Nguyen", 20));
+		club.addMember(new ClubMember("Drew", "Fajardo", 24));
+		club.addMember(new ClubMember("Ivy", "Fernandes", 28));
+		club.addMember(new ClubMember("Tiffany", "Vien", 6));
+		club.addMember(new ClubMember("Patrick", "Wu", 68));
+		club.addMember(new ClubMember("Michael", "Ney", 18));
+		club.addMember(new ClubMember("Olivia", "Hsieh", 16));
+		club.addMember(new ClubMember("David", "Levitsky", 49));
+		club.addMember(new ClubMember("Thomas", "Nguyen", 20));
+		club.addMember(new ClubMember("Thomas", "Nguyen", 20));
+	}
+}

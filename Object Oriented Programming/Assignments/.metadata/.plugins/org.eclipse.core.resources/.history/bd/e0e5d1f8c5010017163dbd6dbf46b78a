@@ -1,0 +1,60 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+class ClubMember {
+	String firstName;
+	String lastName;
+	int age;
+}
+
+@SuppressWarnings("serial")
+class Club extends JFrame {
+	private JButton showByLastName, showByAge;
+	private JLabel results;
+	private JPanel panel;
+	
+	Club() {
+		ArrayList memberList = new ArrayList();
+		
+		setSize(500, 150);
+	
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+	
+		panel = new JPanel();
+	
+		showByLastName = new JButton();
+		panel.add(showByLastName);
+		
+		showByAge = new JButton();
+		panel.add(showByAge);
+		
+		results = new JLabel();
+	
+		container.add(panel, BorderLayout.NORTH);
+		container.add(results, BorderLayout.SOUTH);
+	
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+//	public void addMember(ClubMember member) {
+//		
+//	}
+}
+
+public class Exercise2 {
+	public static void main(String[] args) {
+		new Club();
+	}
+}

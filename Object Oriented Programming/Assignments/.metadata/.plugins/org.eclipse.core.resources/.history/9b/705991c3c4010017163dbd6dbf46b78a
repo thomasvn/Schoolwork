@@ -1,0 +1,61 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+class ClubMember {
+	String firstName;
+	String lastName;
+	int age;
+}
+
+public TrafficLight() {
+	setSize(500, 150);
+
+	Container container = getContentPane();
+	container.setLayout(new BorderLayout());
+
+	panel = new JPanel();
+
+	trafficLightButton = new JButton();
+	trafficLightButton.setBackground(Color.RED); // TODO: Make button not
+													// clickable
+	colorState = "RED";
+	trafficLightButton.setOpaque(true);
+	panel.add(trafficLightButton);
+
+	change = new JButton("Change");
+	panel.add(change);
+
+	change.addActionListener(this);
+
+	container.add(panel, BorderLayout.CENTER);
+
+	// Show the frame in the center of the screen
+	setLocationRelativeTo(null);
+	setVisible(true);
+}
+
+class Club extends JFrame {
+	private JButton showByLastName, showByAge;
+	private JLabel
+	private JPanel panel;
+	
+	ArrayList memberList = new ArrayList();
+	
+	
+	
+	public void addMember(ClubMember member) {
+		
+	}
+}
+
+public class Exercise2 {
+
+}

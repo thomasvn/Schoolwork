@@ -1,0 +1,51 @@
+package midterm2;
+
+public class TrafficLight {
+	// Declarations
+		private JTextField fahrenFld;
+		protected JLabel label1, celsius;
+		private JButton convertButton;
+		private JPanel panel1, panel2;
+
+		/**
+		 * This is the constructor for the AWT which creates and formats our window
+		 */
+		public TempConverter() {
+			super("Temperature Converter");
+			setSize(500, 150);
+
+			Container container = getContentPane();
+			container.setLayout(new BorderLayout());
+
+			panel1 = new JPanel();
+			panel1.setBackground(Color.YELLOW);
+
+			label1 = new JLabel("Fahrenheit:", JLabel.CENTER);
+			panel1.add(label1);
+			fahrenFld = new JTextField(10);
+			panel1.add(fahrenFld);
+
+			celsius = new JLabel("Celsius:", JLabel.CENTER);
+			panel1.add(celsius);
+
+			panel2 = new JPanel();
+			convertButton = new JButton("ToCelsius");
+			panel2.add(convertButton);
+
+			// This statement instantiates our Converter class and adds a listener
+			// to the `convertButton`
+			convertButton.addActionListener(new Converter(this));
+
+			container.add(panel1, BorderLayout.NORTH);
+			container.add(panel2, BorderLayout.SOUTH);
+
+			// Show the frame in the center of the screen
+			setLocationRelativeTo(null);
+			setVisible(true);
+		}
+}
+
+
+public class Exercise1 {
+
+}

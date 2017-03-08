@@ -1,0 +1,48 @@
+package midterm2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class TrafficLight {
+	// Declarations
+	private JButton trafficLightButton, change;
+	private JPanel panel;
+	private JLabel label;
+
+	/**
+	 * This is the constructor for the AWT which creates and formats our window
+	 */
+	public TrafficLight() {
+		setSize(500, 150);
+
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
+
+		panel = new JPanel();
+		panel.setBackground(Color.YELLOW);
+
+		label = new JLabel("Fahrenheit:", JLabel.CENTER);
+		panel.add(label1);
+
+		// This statement instantiates our Converter class and adds a listener
+		// to the `convertButton`
+		convertButton.addActionListener(new Converter(this));
+
+		container.add(panel1, BorderLayout.NORTH);
+		container.add(panel2, BorderLayout.SOUTH);
+
+		// Show the frame in the center of the screen
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+}
+
+
+public class Exercise1 {
+
+}
