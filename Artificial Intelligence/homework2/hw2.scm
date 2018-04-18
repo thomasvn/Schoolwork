@@ -13,6 +13,65 @@
 ;               fewest number of swaps.
 
 
+; TODO: Move adjacency map to a separate function
+; ---------------------------- Adjacency Map ----------------------------
+; adjacency map: a list of lists; each of these sublists includes a location as 
+;                 its first item and all locations that are adjacent to that 
+;                 location as its remaining items.
+(define adjacency-map '(
+    (Alabama Mississippi Tennessee Georgia Florida)
+    (Alaska)
+    (Arkansas Texas Oklahoma Missouri Tennessee Mississippi Louisiana)
+    (Arizona California Nevada Utah New-Mexico)
+    (California Arizona Nevada Oregon)
+    (Colorado New-Mexico Utah Wyoming Nebraska Kansas Oklahoma)
+    (Connecticut New-York Massachusetts Rhode-Island)
+    (Delaware Maryland Pennsylvania New-Jersey)
+    (Florida Alabama Georgia)
+    (Georgia Florida Alabama Tennessee North-Carolina South-Carolina)
+    (Hawaii)
+    (Idaho Oregon Washington Montana Wyoming Utah Nevada)
+    (Indiana Illinois Michigan Ohio Kentucky)
+    (Illinois Missouri Iowa Wisconsin Indiana Kentucky)
+    (Iowa Missouri Illinois Wisconsin Minnesota South-Dakota Nebraska)
+    (Kansas Colorado Nebraska Missouri Oklahoma)
+    (Kentucky Missouri Illinois Indiana Ohio West-Virginia Virginia Tennessee)
+    (Louisiana Texas Arkansas Mississippi)
+    (Maine New-Hampshire)
+    (Maryland Virginia West-Virginia Pennsylvania Delaware)
+    (Massachusetts Rhode-Island Connecticut New-York Vermont New-Hampshire)
+    (Michigan Wisconsin Indiana Ohio)
+    (Minnesota North-Dakota South-Dakota Iowa Wisconsin)
+    (Mississippi Louisiana Arkansas Tennessee Alabama)
+    (Missouri Oklahoma Kansas Nebraska Iowa Illinois Kentucky Tennessee Arkansas)
+    (Montana Idaho Wyoming South-Dakota North-Dakota)
+    (Nebraska Colorado Kansas Missouri Iowa South-Dakota Wyoming)
+    (Nevada California Arizona Utah Idaho Oregon)
+    (New-Hampshire Maine Vermont Massachusetts)
+    (New-Jersey Delaware Pennsylvania New-York)
+    (New-Mexico Texas Oklahoma Colorado Arizona)
+    (New-York Pennsylvania New-Jersey Connecticut Massachusetts Vermont)
+    (North-Carolina South-Carolina Georgia Tennessee Virginia)
+    (North-Dakota Montana South-Dakota Minnesota)
+    (Ohio Michigan Indiana Kentucky West-Virginia Pennsylvania)
+    (Oklahoma Texas New-Mexico Colorado Kansas Missouri Arkansas)
+    (Oregon Washington Idaho Nevada California)
+    (Pennsylvania Ohio West-Virginia Maryland Delaware New-Jersey New-York)
+    (Rhode-Island Connecticut Massachusetts)
+    (South-Carolina Georgia North-Carolina)
+    (South-Dakota Nebraska Iowa Minnesota North-Dakota Montana Wyoming)
+    (Tennessee Arkansas Missouri Kentucky Virginia North-Carolina Georgia Alabama Mississippi)
+    (Texas New-Mexico Oklahoma Arkansas Louisiana)
+    (Utah Nevada Idaho Wyoming Colorado Arizona)
+    (Vermont New-York Massachusetts New-Hampshire)
+    (Virginia North-Carolina Tennessee Kentucky West-Virginia Maryland)
+    (Washington Oregon Idaho)
+    (West-Virginia Virginia Kentucky Ohio Pennsylvania Maryland)
+    (Wisconsin Minnesota Iowa Illinois Michigan)
+    (Wyoming Idaho Montana South-Dakota Nebraska Colorado Utah)
+))
+
+
 ; ------------------------- Helper Functions -------------------------
 ; This function returns the nth item of a list
 (define (nth-item index list)
@@ -29,6 +88,7 @@
         ; pre-pend new list with original values that were iterated over
         (#t (cons (car list) (replace-nth-item (- index 1) (cdr list) val)))))
 
+
 ; This function swaps two elements in a list when passed their indices
 (define (swap-elements i j lst)
     ; Temp variable to hold i
@@ -37,6 +97,90 @@
         (replace-nth-item j (replace-nth-item i lst (nth-item j lst)) temp)
     )
 )
+
+
+; This function searches through a 2d list to see if a list's head has a 
+; specific element
+(define (2d-has-element? val list)
+    ; Iterate through list and return list if the head is equal to val
+    (cond ((equal? (car (car list)) val) (car list))
+        (#t (2d-has-element? val (cdr list)))
+    )
+)
+
+
+; This function searches through a list to see if it contains a specific element
+(define (has-element? val list)
+    ; Iterate through list and return element
+    (cond ((equal? (car list) val) val)
+        ; If element is not found, return an empty list
+        ((null? list) '())
+        (#t (has-element? val (cdr list)))
+    )
+)
+
+; This function checks whether two locations are adjacent to each other
+(define (is-adjacent? loc1 loc2 amap)
+    (let ((result (has-element? loc2 (2d-has-element? loc1 amap))))
+        (cond ((equal? result '()) #f)
+            (#t #t)
+        )
+    )
+)
+
+; TODO: Adjacency Map Function Call
+(is-adjacent? 'Florida 'Georgia '(
+    (Alabama Mississippi Tennessee Georgia Florida)
+    (Alaska)
+    (Arkansas Texas Oklahoma Missouri Tennessee Mississippi Louisiana)
+    (Arizona California Nevada Utah New-Mexico)
+    (California Arizona Nevada Oregon)
+    (Colorado New-Mexico Utah Wyoming Nebraska Kansas Oklahoma)
+    (Connecticut New-York Massachusetts Rhode-Island)
+    (Delaware Maryland Pennsylvania New-Jersey)
+    (Florida Alabama Georgia)
+    (Georgia Florida Alabama Tennessee North-Carolina South-Carolina)
+    (Hawaii)
+    (Idaho Oregon Washington Montana Wyoming Utah Nevada)
+    (Indiana Illinois Michigan Ohio Kentucky)
+    (Illinois Missouri Iowa Wisconsin Indiana Kentucky)
+    (Iowa Missouri Illinois Wisconsin Minnesota South-Dakota Nebraska)
+    (Kansas Colorado Nebraska Missouri Oklahoma)
+    (Kentucky Missouri Illinois Indiana Ohio West-Virginia Virginia Tennessee)
+    (Louisiana Texas Arkansas Mississippi)
+    (Maine New-Hampshire)
+    (Maryland Virginia West-Virginia Pennsylvania Delaware)
+    (Massachusetts Rhode-Island Connecticut New-York Vermont New-Hampshire)
+    (Michigan Wisconsin Indiana Ohio)
+    (Minnesota North-Dakota South-Dakota Iowa Wisconsin)
+    (Mississippi Louisiana Arkansas Tennessee Alabama)
+    (Missouri Oklahoma Kansas Nebraska Iowa Illinois Kentucky Tennessee Arkansas)
+    (Montana Idaho Wyoming South-Dakota North-Dakota)
+    (Nebraska Colorado Kansas Missouri Iowa South-Dakota Wyoming)
+    (Nevada California Arizona Utah Idaho Oregon)
+    (New-Hampshire Maine Vermont Massachusetts)
+    (New-Jersey Delaware Pennsylvania New-York)
+    (New-Mexico Texas Oklahoma Colorado Arizona)
+    (New-York Pennsylvania New-Jersey Connecticut Massachusetts Vermont)
+    (North-Carolina South-Carolina Georgia Tennessee Virginia)
+    (North-Dakota Montana South-Dakota Minnesota)
+    (Ohio Michigan Indiana Kentucky West-Virginia Pennsylvania)
+    (Oklahoma Texas New-Mexico Colorado Kansas Missouri Arkansas)
+    (Oregon Washington Idaho Nevada California)
+    (Pennsylvania Ohio West-Virginia Maryland Delaware New-Jersey New-York)
+    (Rhode-Island Connecticut Massachusetts)
+    (South-Carolina Georgia North-Carolina)
+    (South-Dakota Nebraska Iowa Minnesota North-Dakota Montana Wyoming)
+    (Tennessee Arkansas Missouri Kentucky Virginia North-Carolina Georgia Alabama Mississippi)
+    (Texas New-Mexico Oklahoma Arkansas Louisiana)
+    (Utah Nevada Idaho Wyoming Colorado Arizona)
+    (Vermont New-York Massachusetts New-Hampshire)
+    (Virginia North-Carolina Tennessee Kentucky West-Virginia Maryland)
+    (Washington Oregon Idaho)
+    (West-Virginia Virginia Kentucky Ohio Pennsylvania Maryland)
+    (Wisconsin Minnesota Iowa Illinois Michigan)
+    (Wyoming Idaho Montana South-Dakota Nebraska Colorado Utah)
+))
 
 
 ; ------------------------------ Main Function ------------------------------
